@@ -2,17 +2,20 @@
 # yarn lockfile v1
 
 
-cookiefile@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/cookiefile/-/cookiefile-1.0.10.tgz#ce28e1b5c11f56202aa9c1db5a99741ea0e5d328"
-  dependencies:
-    file-exists "^2.0.0"
-    isnumeric "^0.3.1"
-
-file-exists@^2.0.0:
+node-fetch@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/file-exists/-/file-exists-2.0.0.tgz#a24150665150e62d55bc5449281d88d2b0810dca"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.0.0.tgz#982bba43ecd4f2922a29cc186a6bbb0bb73fcba6"
 
-isnumeric@^0.3.1:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/isnumeric/-/isnumeric-0.3.2.tgz#9821f123478a4e5f2c0e41267887f29de0fb243b"
+punycode@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
+
+tough-cookie@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.4.tgz#ec60cee38ac675063ffc97a5c18970578ee83655"
+  dependencies:
+    punycode "^1.4.1"
+
+typescript@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"

@@ -1,15 +1,21 @@
 {
   "name": "web-walker",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple, easy to use web crawler.",
-  "main": "index.js",
-  "scripts": {},
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=6.4.0"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/a9udn9u/web-walker.git"
   },
   "keywords": [
-    "crawler"
+    "crawler",
+    "web crawler"
   ],
   "author": "Quan Gan (https://github.com/a9udn9u/web-walker)",
   "license": "MIT",
@@ -18,6 +24,10 @@
   },
   "homepage": "https://github.com/a9udn9u/web-walker#readme",
   "dependencies": {
-    "cookiefile": "^1.0.10"
+    "node-fetch": "^2.0.0",
+    "tough-cookie": "^2.3.4"
+  },
+  "devDependencies": {
+    "typescript": "^2.7.2"
   }
 }
