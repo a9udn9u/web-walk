@@ -28,7 +28,7 @@ walk({
 })
 .then(function(html) {
   console.log(html);
-};
+});
 ```
 
 ###### Login before load a page.
@@ -55,7 +55,7 @@ walk({
 })
 .then(function(html) {
   console.log(html);
-};
+});
 ```
 
 ###### A slightly more complex, more realistic login session
@@ -130,14 +130,14 @@ walk({
   // process() method returns. Otherwise, it will return the response text from
   // the last step.
   console.log(results);
-};
+});
 ```
 
 #### Advanced Usages
 
 ###### Upload file
 
-Web walk uses [node-fetch](https://github.com/bitinn/node-fetch) in the background so you can pass whatever data it supports. The easiest way might be using [form-data](https://github.com/form-data/form-data).
+You can pass [form-data](https://github.com/form-data/form-data) as request body.
 
 ```javascript
 const walk = require('web-walk').walk;
@@ -159,13 +159,13 @@ walk({
 })
 .then(function(html) {
   console.log(html);
-};
+});
 
 ```
 
-#### API
+### API
 
-There is only one exposed API: the `walk()` method. It's argument should be in the following format.
+The `walk()` method accepts parameter in the following format:
 
 ```javascript
 {
@@ -206,11 +206,38 @@ There is only one exposed API: the `walk()` method. It's argument should be in t
         ...
       }
     },
+    // More steps
     ...
   ]
 }
 ```
+
+Web Walk relies on [node-fetch](https://github.com/bitinn/node-fetch) to make HTTP requests, node-fetch is an implementation of the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), `step.request` and return value of the `prepare()` method should be structured similarly to fetch API's [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) interface.
+
+In addition to properties in the Request interface, Web Walk accepts two more request parameters: `cookies` and `formData`. These are allowed for convenience, you can still use 'cookie' header for sending cookies, and 'body' property for sending form data.
+
 Return value of the `prepare()` method will override values in the `request` object, which will override top level request properties (`cookies` and `headers`).
+
+### Default Request Parameters
+
+```javascript
+{
+  cache: 'no-store',
+  credentials: 'include',
+  mode: 'cors',
+  redirect: 'follow',
+  headers: {
+    'accept': '*/*',
+    'accept-encoding': 'gzip,deflate,br',
+    'connection': 'close',
+    'user-agent': `web-walk/${require('../package.json').version}`,
+  }
+}
+```
+
+### Caveats
+
+1. node-fetch currently don't persist cookies of redirected requests, for instance, if a login POST request returns HTTP 302 and gets redirected, auth cookies set by the request will be lost, node-fetch will only return response of the last request. A workaround is to pass `redirect: 'manual'` in the login request, which will prevent following redirects so auth cookies can be captured.
 
 ## License
 MIT
