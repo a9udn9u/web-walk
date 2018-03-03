@@ -218,6 +218,8 @@ In addition to properties in the Request interface, Web Walk accepts two more re
 
 Return value of the `prepare()` method will override values in the `request` object, which will override top level request properties (`cookies` and `headers`).
 
+Both `prepare()` and `process()` methods can return either a `Promise` or plain data.
+
 ### Default Request Parameters
 
 ```javascript
