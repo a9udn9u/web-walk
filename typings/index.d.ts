@@ -31,7 +31,7 @@ interface StringPairs {
 }
 
 /**
- * Web walker step input
+ * Web walk step input
  */
 interface StepRequest extends RequestInit {
   // Properties defined for convinence
@@ -40,7 +40,7 @@ interface StepRequest extends RequestInit {
 }
 
 /**
- * Web walker step output
+ * Web walk step output
  */
 interface StepResponse {
   cookies: StringPairs;
@@ -50,7 +50,7 @@ interface StepResponse {
 }
 
 /**
- * Web walker step configuration
+ * Web walk step configuration
  */
 interface StepConfig {
   url: string;
@@ -61,9 +61,9 @@ interface StepConfig {
 }
 
 /**
- * Web walker session configuration
+ * Web walk session configuration
  */
-interface WebWalkerConfig {
+interface WebWalkConfig {
   headers?: StringPairs;
   cookies?: StringPairs;
   steps: StepConfig[];

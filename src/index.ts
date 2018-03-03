@@ -4,7 +4,7 @@ import * as tough from 'tough-cookie';
 const requestInit: RequestInit = {
   cache: 'no-store',
   // Currently node-fetch doesn't support this, it's a problem when page is redirected but cookies set by the page
-  // are required. A workaround is setting redirect to 'manual' so that web-walker can catch cookies.
+  // are required. A workaround is setting redirect to 'manual' so that web-walk can catch cookies.
   credentials: 'include',
   mode: 'cors',
   redirect: 'follow',
@@ -12,7 +12,7 @@ const requestInit: RequestInit = {
     'accept': '*/*',
     'accept-encoding': 'gzip,deflate,br',
     'connection': 'close',
-    'user-agent': `web-walker/${require('../package.json').version}`,
+    'user-agent': `web-walk/${require('../package.json').version}`,
   }
 }
 
@@ -81,7 +81,7 @@ const process = async (step: StepConfig, stepResponse: StepResponse): Promise<an
  * @param step
  * @param responses
  */
-const getRequest = (config: WebWalkerConfig, step: StepConfig, prepared: StepRequest, siteCookies: string): StepRequest => {
+const getRequest = (config: WebWalkConfig, step: StepConfig, prepared: StepRequest, siteCookies: string): StepRequest => {
   if (!step.request) {
     step.request = {};
   }
@@ -110,7 +110,7 @@ const getRequest = (config: WebWalkerConfig, step: StepConfig, prepared: StepReq
   return request;
 }
 
-export const walk = async (config: WebWalkerConfig): Promise<any> => {
+export const walk = async (config: WebWalkConfig): Promise<any> => {
   if (!config || !config.steps) return;
 
   let stepResponses: StepResponse[] = [];

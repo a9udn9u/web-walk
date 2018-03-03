@@ -1,6 +1,6 @@
 {
-  "name": "webwalker",
-  "version": "0.1.0",
+  "name": "web-walk",
+  "version": "0.1.1",
   "description": "A simple, easy to use web crawler.",
   "main": "dist/index.js",
   "engines": {
@@ -11,18 +11,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/a9udn9u/web-walker.git"
+    "url": "git+https://github.com/a9udn9u/web-walk.git"
   },
   "keywords": [
     "crawler",
     "web crawler"
   ],
-  "author": "Quan Gan (https://github.com/a9udn9u/web-walker)",
+  "author": "Quan Gan (https://github.com/a9udn9u/web-walk)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/a9udn9u/web-walker/issues"
+    "url": "https://github.com/a9udn9u/web-walk/issues"
   },
-  "homepage": "https://github.com/a9udn9u/web-walker#readme",
+  "homepage": "https://github.com/a9udn9u/web-walk#readme",
   "dependencies": {
     "node-fetch": "^2.0.0",
     "tough-cookie": "^2.3.4"

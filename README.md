@@ -1,17 +1,17 @@
-# Web Walker
+# Web Walk
 A simple, easy to use web crawler.
 
 ### How It Works
-Web Walker exports only one function: `walk()`, it takes a configuration object which contains a list of HTTP request descriptions, walks through each of the request, carries over cookies it collects along the way, and eventually returns the results (wrapped in a Promise) from the last request.
+Web Walk exports only one function: `walk()`, it takes a configuration object which contains a list of HTTP request descriptions, walks through each of the request, carries over cookies it collects along the way, and eventually returns the results (wrapped in a Promise) from the last request.
 
 It's like creating a virtual browse session, but not in a browser window.
 
 ### Install
 
 ```bash
-npm i web-walker
+npm i web-walk
 # or
-yarn add web-walker
+yarn add web-walk
 ```
 
 ### Usage
@@ -19,7 +19,7 @@ yarn add web-walker
 ###### Simply download a web page.
 
 ```javascript
-const walk = require('web-walker').walk;
+const walk = require('web-walk').walk;
 
 walk({
   steps: [
@@ -34,7 +34,7 @@ walk({
 ###### Login before load a page.
 
 ```javascript
-const walk = require('web-walker').walk;
+const walk = require('web-walk').walk;
 
 walk({
   steps: [
@@ -63,7 +63,7 @@ walk({
 Configuration is long, but mostly comments.
 
 ```javascript
-const walk = require('web-walker').walk;
+const walk = require('web-walk').walk;
 
 walk({
   steps: [
@@ -136,10 +136,10 @@ walk({
 
 ###### Upload file
 
-Web walker uses [node-fetch](https://github.com/bitinn/node-fetch) in the background so you can pass whatever data it supports. The easiest way might be using [form-data](https://github.com/form-data/form-data).
+Web walk uses [node-fetch](https://github.com/bitinn/node-fetch) in the background so you can pass whatever data it supports. The easiest way might be using [form-data](https://github.com/form-data/form-data).
 
 ```javascript
-const walk = require('web-walker').walk;
+const walk = require('web-walk').walk;
 const FormData = require('form-data');
 const fs = require('fs');
 
