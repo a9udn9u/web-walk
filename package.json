@@ -1,5 +1,5 @@
 {
-  "name": "web-walker",
+  "name": "webwalker",
   "version": "0.1.0",
   "description": "A simple, easy to use web crawler.",
   "main": "dist/index.js",
