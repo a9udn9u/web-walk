@@ -32,8 +32,13 @@ const getFormData = (formDataPairs: StringPairs): string => {
 }
 
 const injectCookieHeader = (headers: StringPairs, cookieHeader: string): StringPairs => {
-  let mergedCookieHeader = [headers['cookie'], cookieHeader].filter(v => !!v).join(';');
-  headers = Object.assign({}, headers, { 'cookie': mergedCookieHeader });
+  let mergedCookieHeader = [headers['cookie'], cookieHeader]
+      .filter(v => !!v)
+      .map(v => v.trim())
+      .join(';');
+  if (!!mergedCookieHeader) {
+    headers = Object.assign({}, headers, { 'cookie': mergedCookieHeader });
+  }
   return headers;
 }
 
@@ -86,7 +91,7 @@ const getRequest = (config: WebWalkConfig, step: StepConfig, prepared: StepReque
     step.request = {};
   }
 
-  let headers = mergeHeaders(config.headers, step.request.headers, prepared.headers);
+  let headers = mergeHeaders(requestInit.headers, config.headers, step.request.headers, prepared.headers);
   let cookies = getCookieHeader(siteCookies, Object.assign({}, config.cookies, step.request.cookies, prepared.cookies));
   let formData = getFormData(Object.assign({}, step.request.formData, prepared.formData));
 
