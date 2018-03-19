@@ -34,6 +34,7 @@ interface StringPairs {
  * Web walk step input
  */
 interface StepRequest extends RequestInit {
+  url?: string;
   // Properties defined for convinence
   cookies?: StringPairs;
   formData?: StringPairs;

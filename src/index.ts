@@ -125,18 +125,19 @@ export const walk = async (config: WebWalkConfig): Promise<any> => {
   for (let i = 0; i < config.steps.length; ++i) {
     const step = config.steps[i];
     const prepared = await prepare(step, stepResponses);
-    const siteCookies = cookieJar.getCookieStringSync(step.url);
+    const url = prepared.url || step.url;
+    const siteCookies = cookieJar.getCookieStringSync(url);
     const request = getRequest(config, step, prepared, siteCookies);
-    const response: FetchResponse = await fetch(step.url, request);
-    const setCookieHeader = response.headers.raw()['set-cookie'] || [];
+    const response: FetchResponse = await fetch(url, request);
+    const setCookieHeaders = response.headers.raw()['set-cookie'] || [];
     stepResponse = {
       headers: transformHeaders(response.headers),
-      cookies: extractCookies(setCookieHeader),
+      cookies: extractCookies(setCookieHeaders),
       text: await response.text()
     }
     stepResponse.output = await process(step, stepResponse);
     stepResponses.push(stepResponse);
-    setCookieHeader.forEach(line => cookieJar.setCookieSync(line, response.url));
+    setCookieHeaders.forEach(line => cookieJar.setCookieSync(line, response.url));
   }
   return stepResponse.output;
 }
