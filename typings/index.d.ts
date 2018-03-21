@@ -1,26 +1,10 @@
-/**
- * Declare node require method
- */
-declare const require: {
-  (id: string): any;
-}
+// Define types that will be used by web-walk consumers
 
 /**
- * A stripped-down version of tough-cookie's CookieJar interface
+ * Exposed APIs
  */
-interface CookieJar {
-  setCookieSync(cookies: string, url: string): void;
-  getCookieStringSync(url: string): string;
-}
-
-/**
- * Response of node-fetch
- */
-interface FetchResponseHeaders extends Headers {
-  raw(): { [key: string]: string[] }
-}
-interface FetchResponse extends Response {
-  headers: FetchResponseHeaders
+declare module 'web-walk' {
+  const walk: (config: WebWalkConfig) => Promise<any>;
 }
 
 /**
@@ -33,7 +17,7 @@ interface StringPairs {
 /**
  * Web walk step input
  */
-interface StepRequest extends RequestInit {
+interface WebWalkRequest extends RequestInit {
   url?: string;
   // Properties defined for convinence
   cookies?: StringPairs;
@@ -43,7 +27,7 @@ interface StepRequest extends RequestInit {
 /**
  * Web walk step output
  */
-interface StepResponse {
+interface WebWalkResponse {
   cookies: StringPairs;
   headers: StringPairs;
   text: string;
@@ -53,12 +37,12 @@ interface StepResponse {
 /**
  * Web walk step configuration
  */
-interface StepConfig {
+interface WebWalkStepConfig {
   url: string;
-  request: StepRequest;
-  response?: StepResponse;
-  prepare?(lastStepResponse: StepResponse, stepResponses: StepResponse[]): Promise<StepRequest>;
-  process?(stepResponse: StepResponse): Promise<any>;
+  request: WebWalkRequest;
+  response?: WebWalkResponse;
+  prepare?(lastStepResponse: WebWalkResponse, stepResponses: WebWalkResponse[]): Promise<WebWalkRequest>;
+  process?(stepResponse: WebWalkResponse): Promise<any>;
 }
 
 /**
@@ -67,5 +51,5 @@ interface StepConfig {
 interface WebWalkConfig {
   headers?: StringPairs;
   cookies?: StringPairs;
-  steps: StepConfig[];
+  steps: WebWalkStepConfig[];
 }

@@ -71,12 +71,12 @@ const mergeHeaders = (...headersArgs: any[]): StringPairs => {
   return merged;
 }
 
-const prepare = async (step: StepConfig, stepResponses: StepResponse[]): Promise<StepRequest> => {
+const prepare = async (step: WebWalkStepConfig, stepResponses: WebWalkResponse[]): Promise<WebWalkRequest> => {
   const lastStepResponse = stepResponses.length ? stepResponses[stepResponses.length - 1] : undefined;
   return step.prepare ? step.prepare(lastStepResponse, stepResponses) : {};
 }
 
-const process = async (step: StepConfig, stepResponse: StepResponse): Promise<any> => {
+const process = async (step: WebWalkStepConfig, stepResponse: WebWalkResponse): Promise<any> => {
   return step.process ? step.process(stepResponse) : stepResponse.text;
 }
 
@@ -86,7 +86,7 @@ const process = async (step: StepConfig, stepResponse: StepResponse): Promise<an
  * @param step
  * @param responses
  */
-const getRequest = (config: WebWalkConfig, step: StepConfig, prepared: StepRequest, siteCookies: string): StepRequest => {
+const getRequest = (config: WebWalkConfig, step: WebWalkStepConfig, prepared: WebWalkRequest, siteCookies: string): WebWalkRequest => {
   if (!step.request) {
     step.request = {};
   }
@@ -118,8 +118,8 @@ const getRequest = (config: WebWalkConfig, step: StepConfig, prepared: StepReque
 export const walk = async (config: WebWalkConfig): Promise<any> => {
   if (!config || !config.steps) return;
 
-  let stepResponses: StepResponse[] = [];
-  let stepResponse: StepResponse;
+  let stepResponses: WebWalkResponse[] = [];
+  let stepResponse: WebWalkResponse;
   let cookieJar: CookieJar = new tough.CookieJar();
 
   for (let i = 0; i < config.steps.length; ++i) {
