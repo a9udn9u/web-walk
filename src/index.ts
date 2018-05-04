@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import * as tough from 'tough-cookie';
+import { CookieJar, Cookie } from 'tough-cookie';
 
 const requestInit: RequestInit = {
   cache: 'no-store',
@@ -18,7 +18,7 @@ const requestInit: RequestInit = {
 
 const getCookieHeader = (siteCookies: string, mandatoryCookies: StringPairs): string => {
   let override = Object.keys(mandatoryCookies)
-      .map(key => new tough.Cookie({ key, value: mandatoryCookies[key] }).cookieString())
+      .map(key => new Cookie({ key, value: mandatoryCookies[key] }).cookieString())
       .join(';');
   return [siteCookies, override].filter(v => !!v).join(';');
 }
@@ -53,15 +53,29 @@ const transformHeaders = (headers: Headers): StringPairs => {
   return pairs;
 }
 
-const extractCookies = (setCookies: string[]): StringPairs => {
+const extractCookies = (setCookies: string[]): { cookies: StringPairs, rawCookies: CookieProps[] } => {
   let pairs: StringPairs = {};
+  let raw: CookieProps[] = [];
   if (setCookies && setCookies.length) {
     setCookies.forEach(line => {
-      let parsed = tough.parse(line);
+      let parsed = Cookie.parse(line);
       Object.assign(pairs, { [parsed.key]: parsed.value });
+      raw.push({
+        key: parsed.key,
+        value: parsed.value,
+        expires: parsed.expires,
+        maxAge: parsed.maxAge,
+        domain: parsed.domain,
+        path: parsed.path,
+        secure: parsed.secure,
+        httpOnly: parsed.httpOnly
+      });
     });
   }
-  return pairs;
+  return {
+    cookies: pairs,
+    rawCookies: raw
+  };
 }
 
 const mergeHeaders = (...headersArgs: any[]): StringPairs => {
@@ -120,7 +134,7 @@ export const walk = async (config: WebWalkConfig): Promise<any> => {
 
   let stepResponses: WebWalkResponse[] = [];
   let stepResponse: WebWalkResponse;
-  let cookieJar: CookieJar = new tough.CookieJar();
+  let cookieJar: CookieJar = new CookieJar();
 
   for (let i = 0; i < config.steps.length; ++i) {
     const step = config.steps[i];
@@ -132,7 +146,7 @@ export const walk = async (config: WebWalkConfig): Promise<any> => {
     const setCookieHeaders = response.headers.raw()['set-cookie'] || [];
     stepResponse = {
       headers: transformHeaders(response.headers),
-      cookies: extractCookies(setCookieHeaders),
+      ...extractCookies(setCookieHeaders),
       text: await response.text()
     }
     stepResponse.output = await process(step, stepResponse);

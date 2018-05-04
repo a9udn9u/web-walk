@@ -15,6 +15,20 @@ interface StringPairs {
 }
 
 /**
+ * Cookie properties
+ */
+interface CookieProps {
+  key: string;
+  value: string;
+  expires: Date;
+  maxAge: number | 'Infinity' | '-Infinity';
+  domain: string;
+  path: string;
+  secure: boolean;
+  httpOnly: boolean;
+}
+
+/**
  * Web walk step input
  */
 interface WebWalkRequest extends RequestInit {
@@ -29,6 +43,7 @@ interface WebWalkRequest extends RequestInit {
  */
 interface WebWalkResponse {
   cookies: StringPairs;
+  rawCookies: CookieProps[];
   headers: StringPairs;
   text: string;
   output?: any;

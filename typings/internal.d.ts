@@ -8,14 +8,6 @@ declare const require: {
 }
 
 /**
- * A stripped-down version of tough-cookie's CookieJar interface
- */
-interface CookieJar {
-  setCookieSync(cookies: string, url: string): void;
-  getCookieStringSync(url: string): string;
-}
-
-/**
  * Response of node-fetch
  */
 interface FetchResponseHeaders extends Headers {
