@@ -20,7 +20,7 @@ interface StringPairs {
 interface CookieProps {
   key: string;
   value: string;
-  expires: Date;
+  expires: Date | 'Infinity' | '-Infinity';
   maxAge: number | 'Infinity' | '-Infinity';
   domain: string;
   path: string;
@@ -54,7 +54,7 @@ interface WebWalkResponse {
  */
 interface WebWalkStepConfig {
   url: string;
-  request: WebWalkRequest;
+  request?: WebWalkRequest;
   response?: WebWalkResponse;
   prepare?(lastStepResponse: WebWalkResponse, stepResponses: WebWalkResponse[]): Promise<WebWalkRequest>;
   process?(stepResponse: WebWalkResponse): Promise<any>;
