@@ -192,17 +192,19 @@ The `walk()` method accepts parameter in the following format:
       prepare: function(outputOfLastStep, outputOfAllPreviousSteps) {
         // outputOfLastStep.text - response in text form
         // outputOfLastStep.headers - response headers
-        // outputOfLastStep.cookies - cookies in the Set-Cookie header
+        // outputOfLastStep.cookies - cookies in the Set-Cookie header, key/value pairs
+        // outputOfLastStep.rawCookies - cookies in the Set-Cookie header, with all cookie info
         // outputOfLastStep.output - output of the last step's process() method,
         //                           if last step doesn't have process(), this
         //                           will be the same as outputOfLastStep.text
         ...
       },
       // Post-processing on response
-      process: function(response) {
+      process: function(response, outputOfAllPreviousSteps) {
         // response.text - response in text form
         // response.headers - response headers
         // response.cookies - cookies in the Set-Cookie header
+        // outputOfAllPreviousSteps - same as in prepare()
         ...
       }
     },

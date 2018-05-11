@@ -90,8 +90,8 @@ const prepare = async (step: WebWalkStepConfig, stepResponses: WebWalkResponse[]
   return step.prepare ? step.prepare(lastStepResponse, stepResponses) : {};
 }
 
-const process = async (step: WebWalkStepConfig, stepResponse: WebWalkResponse): Promise<any> => {
-  return step.process ? step.process(stepResponse) : stepResponse.text;
+const process = async (step: WebWalkStepConfig, stepResponse: WebWalkResponse, stepResponses: WebWalkResponse[]): Promise<any> => {
+  return step.process ? step.process(stepResponse, stepResponses) : stepResponse.text;
 }
 
 /**
@@ -149,7 +149,7 @@ export const walk = async (config: WebWalkConfig): Promise<any> => {
       ...extractCookies(setCookieHeaders),
       text: await response.text()
     }
-    stepResponse.output = await process(step, stepResponse);
+    stepResponse.output = await process(step, stepResponse, stepResponses);
     stepResponses.push(stepResponse);
     setCookieHeaders.forEach(line => cookieJar.setCookieSync(line, response.url));
   }

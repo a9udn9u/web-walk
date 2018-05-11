@@ -57,7 +57,7 @@ interface WebWalkStepConfig {
   request?: WebWalkRequest;
   response?: WebWalkResponse;
   prepare?(lastStepResponse: WebWalkResponse, stepResponses: WebWalkResponse[]): Promise<WebWalkRequest>;
-  process?(stepResponse: WebWalkResponse): Promise<any>;
+  process?(stepResponse: WebWalkResponse, stepResponses: WebWalkResponse[]): Promise<any>;
 }
 
 /**
