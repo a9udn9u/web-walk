@@ -1,6 +1,6 @@
 {
   "name": "web-walk",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A simple, easy to use web crawler.",
   "main": "dist/index.js",
   "types": "typings/index.d.ts",
