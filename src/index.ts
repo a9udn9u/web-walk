@@ -145,6 +145,7 @@ export const walk = async (config: WebWalkConfig): Promise<any> => {
     const response: FetchResponse = await fetch(url, request);
     const setCookieHeaders = response.headers.raw()['set-cookie'] || [];
     stepResponse = {
+      status: response.status,
       headers: transformHeaders(response.headers),
       ...extractCookies(setCookieHeaders),
       text: await response.text()

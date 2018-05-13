@@ -42,6 +42,7 @@ interface WebWalkRequest extends RequestInit {
  * Web walk step output
  */
 interface WebWalkResponse {
+  status: number;
   cookies: StringPairs;
   rawCookies: CookieProps[];
   headers: StringPairs;

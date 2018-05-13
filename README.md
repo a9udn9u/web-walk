@@ -190,6 +190,7 @@ The `walk()` method accepts parameter in the following format:
       // Also returns a Request-like object, this method should be used to
       // generate request data from previous steps' respones.
       prepare: function(outputOfLastStep, outputOfAllPreviousSteps) {
+        // outputOfLastStep.status - status code
         // outputOfLastStep.text - response in text form
         // outputOfLastStep.headers - response headers
         // outputOfLastStep.cookies - cookies in the Set-Cookie header, key/value pairs
