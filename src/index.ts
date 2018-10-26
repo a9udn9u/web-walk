@@ -152,7 +152,13 @@ export const walk = async (config: WebWalkConfig): Promise<any> => {
     }
     stepResponse.output = await process(step, stepResponse, stepResponses);
     stepResponses.push(stepResponse);
-    setCookieHeaders.forEach(line => cookieJar.setCookieSync(line, response.url));
+    setCookieHeaders.forEach(line => {
+      try {
+        cookieJar.setCookieSync(line, response.url);
+      } catch (ex) {
+        // Ignore cookie with incorrect domain
+      }
+    });
   }
   return stepResponse.output;
 }
