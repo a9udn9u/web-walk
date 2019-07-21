@@ -1,6 +1,6 @@
 {
   "name": "web-walk",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "A simple, easy to use web crawler.",
   "main": "dist/index.js",
   "types": "typings/index.d.ts",
@@ -29,11 +29,11 @@
   },
   "homepage": "https://github.com/a9udn9u/web-walk#readme",
   "dependencies": {
-    "node-fetch": "^2.0.0",
-    "tough-cookie": "^2.3.4"
+    "node-fetch": "^2.6.0",
+    "tough-cookie": "^3.0.1"
   },
   "devDependencies": {
-    "@types/tough-cookie": "^2.3.2",
-    "typescript": "^2.7.2"
+    "@types/tough-cookie": "^2.3.5",
+    "typescript": "^3.5.3"
   }
 }
