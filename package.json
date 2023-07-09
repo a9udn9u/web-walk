@@ -30,7 +30,7 @@
   "homepage": "https://github.com/a9udn9u/web-walk#readme",
   "dependencies": {
     "node-fetch": "^2.6.0",
-    "tough-cookie": "^3.0.1"
+    "tough-cookie": "^4.1.3"
   },
   "devDependencies": {
     "@types/tough-cookie": "^2.3.5",
